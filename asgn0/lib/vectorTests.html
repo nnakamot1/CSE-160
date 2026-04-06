@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vector Tests</title>
+  <script src="cuon-matrix-cse160.js"></script>
+</head>
+<body>
+<script>
+  function check(label, result, expected, eps) {
+    eps = eps || 0.001;
+    var passed;
+    if (Array.isArray(expected)) {
+      passed = expected.every(function(v, i) {
+        return Math.abs(result.elements[i] - v) < eps;
+      });
+    } else {
+      passed = Math.abs(result - expected) < eps;
+    }
+    document.write('<p>Test ' + label + ': ' + (passed ? 'Passed' : 'Failed') + '</p>');
+  }
+
+  // Test 1: set([4, 7, 8])
+  var v1 = new Vector3();
+  v1.set(new Vector3([4, 7, 8]));
+  check('1 set([4, 7, 8])', v1, [4, 7, 8]);
+
+  // Test 2: [1000, 432, -56.3] + [-999, 23, 0]
+  var v2 = new Vector3([1000, 432, -56.3]);
+  v2.add(new Vector3([-999, 23, 0]));
+  check('2 [1000, 432, -56.3] + [-999, 23, 0]', v2, [1, 455, -56.3]);
+
+  // Test 3: [5677, -50, 28] - [-1, -49, 27]
+  var v3 = new Vector3([5677, -50, 28]);
+  v3.sub(new Vector3([-1, -49, 27]));
+  check('3 [5677, -50, 28] - [-1, -49, 27]', v3, [5678, -1, 1]);
+
+  // Test 4: [58.4, -45, 999999] / -56.3
+  var v4 = new Vector3([58.4, -45, 999999]);
+  v4.div(-56.3);
+  check('4 [58.4, -45, 999999] / -56.3', v4, [58.4/-56.3, -45/-56.3, 999999/-56.3]);
+
+  // Test 5: [-568, 214789, -251] * 2.7
+  var v5 = new Vector3([-568, 214789, -251]);
+  v5.mul(2.7);
+  check('5 [-568, 214789, -251] * 2.7', v5, [-568*2.7, 214789*2.7, -251*2.7]);
+
+  // Test 6: [2, 6.8, -23] dot [8, -2, -9]
+  var dot = Vector3.dot(new Vector3([2, 6.8, -23]), new Vector3([8, -2, -9]));
+  check('6 [2, 6.8, -23] dot [8, -2, -9]', dot, 2*8 + 6.8*(-2) + (-23)*(-9));
+
+  // Test 7: [34, 6, 34.2222] cross [87, 34.8675, -234]
+  var cross = Vector3.cross(new Vector3([34, 6, 34.2222]), new Vector3([87, 34.8675, -234]));
+  check('7 [34, 6, 34.2222] cross [87, 34.8675, -234]', cross,
+    [6*(-234)-34.2222*34.8675, 34.2222*87-34*(-234), 34*34.8675-6*87], 0.01);
+
+  // Test 8: magnitude([45.2, -23.7, 9923])
+  var mag = new Vector3([45.2, -23.7, 9923]).magnitude();
+  check('8 magnitude([45.2, -23.7, 9923])', mag,
+    Math.sqrt(45.2*45.2 + 23.7*23.7 + 9923*9923));
+
+  // Test 9: normalize([-87, 22, 66.45623])
+  var v9 = new Vector3([-87, 22, 66.45623]);
+  var m9 = v9.magnitude();
+  v9.normalize();
+  check('9 normalize([-87, 22, 66.45623])', v9, [-87/m9, 22/m9, 66.45623/m9]);
+</script>
+</body>
+</html>
