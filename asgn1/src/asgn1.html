@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Shape Drawer</title>
+  <style>
+    canvas { display: block; }
+    button { margin: 2px; }
+    input[type=range] { accent-color: gray; }
+  </style>
+</head>
+
+<body>
+
+<canvas id="webgl" width="400" height="400">
+  Please use a browser that supports "canvas"
+</canvas>
+
+<br>
+<button type="button" id="btn-clear">Clear Canvas</button>
+<button type="button" id="btn-picture">Draw Picture</button>
+
+<p>Drawing Mode:</p>
+<button type="button" id="btn-point"    onclick="selectBrush(this, 0)">Squares</button>
+<button type="button" id="btn-triangle" onclick="selectBrush(this, 1)">Triangles</button>
+<button type="button" id="btn-circle"   onclick="selectBrush(this, 2)">Circles</button>
+
+<p>Shape Color:</p>
+Red   <input type="range" min="0" max="255" value="255" id="slider-red">   <span id="label-red">255</span><br>
+Green <input type="range" min="0" max="255" value="255" id="slider-green"> <span id="label-green">255</span><br>
+Blue  <input type="range" min="0" max="255" value="255" id="slider-blue">  <span id="label-blue">255</span>
+<div id="color-preview" style="display:none"></div>
+
+<p>
+  Shape Size: <input type="range" min="5" max="100" value="20" id="slider-size"> <span id="label-size">20</span>
+  &nbsp;&nbsp;&nbsp;
+  (Circles) Segment Count: <input type="range" min="3" max="64" value="16" id="slider-segments"> <span id="label-segments">16</span>
+</p>
+
+<p id="perf" style="font-size:0.8em;color:#555;">Shapes: 0 | Render: 0.0ms</p>
+
+<!-- Reference drawing photo — add your hand-drawn picture here -->
+<img src="reference.PNG" alt="Hand-drawn reference" style="max-width:400px">
+
+<script src="../lib/cuon-utils.js"></script>
+<script src="Point.js"></script>
+<script src="Triangle.js"></script>
+<script src="Circle.js"></script>
+<script src="asgn1.js"></script>
+
+<script>
+  function selectBrush(btn, type) {
+    ['btn-point', 'btn-triangle', 'btn-circle'].forEach(function(id) {
+      document.getElementById(id).style.fontWeight = 'normal';
+    });
+    btn.style.fontWeight = 'bold';
+    g_selectedType = type;
+  }
+
+  window.onload = main;
+</script>
+
+</body>
+</html>
