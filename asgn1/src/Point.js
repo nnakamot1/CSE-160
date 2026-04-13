@@ -11,9 +11,7 @@ class Point {
     var xy = this.position;
     var rgba = this.color;
 
-    // Pass color
     gl.uniform4f(u_FragColor, rgba[0], rgba[1], rgba[2], rgba[3]);
-    // Pass size
     gl.uniform1f(u_Size, this.size);
 
     // Load position into buffer and draw

@@ -1,4 +1,3 @@
-// Circle.js — Renders a filled circle using a TRIANGLE_FAN
 
 class Circle {
   constructor(position, color, size, segments) {
@@ -17,7 +16,6 @@ class Circle {
     gl.uniform4f(u_FragColor, rgba[0], rgba[1], rgba[2], rgba[3]);
     gl.uniform1f(u_Size, this.size);
 
-    // Build TRIANGLE_FAN: center vertex followed by n+1 perimeter vertices
     var verts = [xy[0], xy[1]]; // center
     for (var i = 0; i <= n; i++) {
       var angle = (i / n) * Math.PI * 2;

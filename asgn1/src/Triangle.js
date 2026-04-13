@@ -1,7 +1,4 @@
-// Triangle.js — Renders a triangle brush stroke; also exports drawTriangle() helper
 
-// drawTriangle: draws a single triangle given 6 floats [x1,y1, x2,y2, x3,y3]
-// Used both by the Triangle brush class and by drawPicture() for the static scene.
 function drawTriangle(vertices) {
   var v = new Float32Array(vertices);
   var buf = gl.createBuffer();
