@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Blocky Cow</title>
+  <style>
+    body { font-family: sans-serif; background: #222; color: #eee; }
+    canvas { display: block; border: 1px solid #555; cursor: crosshair; }
+    .controls { display: flex; flex-wrap: wrap; gap: 12px; padding: 8px 0; max-width: 600px; }
+    .ctrl-row { display: flex; align-items: center; gap: 6px; }
+    label { min-width: 140px; font-size: 0.85em; }
+    input[type=range] { width: 160px; }
+    button { padding: 4px 12px; cursor: pointer; }
+    #perf { font-size: 0.8em; color: #aaa; margin-top: 4px; }
+  </style>
+</head>
+<body>
+
+<canvas id="webgl" width="600" height="600">
+  Please use a browser that supports "canvas"
+</canvas>
+
+<div class="controls">
+  <div class="ctrl-row">
+    <label>Rotate Y:</label>
+    <input type="range" id="slider-angle-y" min="-180" max="180" value="30">
+    <span id="label-angle-y">30</span>°
+  </div>
+  <div class="ctrl-row">
+    <label>Rotate X:</label>
+    <input type="range" id="slider-angle-x" min="-90" max="90" value="-20">
+    <span id="label-angle-x">-20</span>°
+  </div>
+  <div class="ctrl-row">
+    <label>Joint 1 – FL Hip:</label>
+    <input type="range" id="slider-joint1" min="-60" max="60" value="0">
+    <span id="label-joint1">0</span>°
+  </div>
+  <div class="ctrl-row">
+    <label>Joint 2 – FL Knee:</label>
+    <input type="range" id="slider-joint2" min="-60" max="0" value="0">
+    <span id="label-joint2">0</span>°
+  </div>
+  <div class="ctrl-row">
+    <label>Joint 3 – FL Hoof:</label>
+    <input type="range" id="slider-joint3" min="-30" max="30" value="0">
+    <span id="label-joint3">0</span>°
+  </div>
+  <div class="ctrl-row">
+    <button id="btn-anim-on">Animate On</button>
+    <button id="btn-anim-off">Animate Off</button>
+  </div>
+</div>
+
+<p id="perf">FPS: -- | Render: --ms</p>
+<p style="font-size:0.75em;color:#888;">Drag to rotate &nbsp;|&nbsp; Shift+click to poke (moo!)</p>
+
+<script src="../asgn1/lib/cuon-utils.js"></script>
+<script src="../asgn0/lib/cuon-matrix-cse160.js"></script>
+<script src="Cube.js"></script>
+<script src="Cylinder.js"></script>
+<script src="asgn2.js"></script>
+<script>window.onload = main;</script>
+
+</body>
+</html>
