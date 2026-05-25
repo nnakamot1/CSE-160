@@ -2,39 +2,79 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>First-Person World – CSE 160 Asgn 4</title>
+  <title>First-Person World – CSE 160 Asgn 4 (Lighting)</title>
   <style>
-    body { margin: 0; background: #111; color: #eee; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; }
+    body { margin: 0; background: #111; color: #eee; font-family: sans-serif;
+           display: flex; flex-direction: column; align-items: center; }
     canvas { display: block; cursor: crosshair; border: 2px solid #444; margin-top: 8px; }
-    #hud { font-size: 0.85em; color: #aaa; margin: 4px 0; }
-    #controls { font-size: 0.78em; color: #777; margin-bottom: 6px; text-align: center; line-height: 1.6; }
+    #hud  { font-size: 0.85em; color: #aaa; margin: 4px 0; }
+    .ctrl-row { display: flex; align-items: center; gap: 8px; margin: 3px 0; font-size: 0.82em; flex-wrap: wrap; justify-content: center; }
+    button { background: #333; color: #eee; border: 1px solid #555; padding: 5px 12px;
+             cursor: pointer; border-radius: 4px; font-size: 0.9em; }
+    button.on  { background: #2a7a4f; border-color: #4caa70; }
+    button.off { background: #7a2a2a; border-color: #aa4040; }
+    input[type=range] { vertical-align: middle; }
+    label { white-space: nowrap; }
+    #controls { font-size: 0.78em; color: #777; margin: 4px 0 8px; text-align: center; line-height: 1.7; }
   </style>
 </head>
 <body>
 
 <canvas id="webgl" width="800" height="600"></canvas>
 <div id="hud"><span id="fps">FPS: --</span> &nbsp;|&nbsp; Click canvas to lock mouse pointer</div>
-<div style="display:flex;align-items:center;gap:10px;margin:4px 0;">
-  <span style="font-size:0.8em;color:#aaa;white-space:nowrap;">Bessie's Happiness</span>
-  <div style="background:#333;width:200px;height:14px;border-radius:6px;overflow:hidden;border:1px solid #555;">
+
+<!-- Lighting toggles -->
+<div class="ctrl-row">
+  <button id="btn-light"   onclick="toggleLight()">Lighting: ON</button>
+  <button id="btn-normals" onclick="toggleNormals()">Normals: OFF</button>
+  <button id="btn-spot"    onclick="toggleSpot()">Spot Light: ON</button>
+</div>
+
+<!-- Point light angle slider -->
+<div class="ctrl-row">
+  <label>Point Light Angle:</label>
+  <input type="range" id="sl-angle" min="0" max="360" value="0" style="width:200px"
+         oninput="onAngleSlider(this.value)">
+  <span id="lbl-angle" style="min-width:40px">0°</span>
+</div>
+
+<!-- Light colour sliders -->
+<div class="ctrl-row">
+  <label>Light&nbsp;R:</label>
+  <input type="range" id="sl-lr" min="0" max="255" value="255" style="width:100px"
+         oninput="updateLightColor()">
+  <label>G:</label>
+  <input type="range" id="sl-lg" min="0" max="255" value="255" style="width:100px"
+         oninput="updateLightColor()">
+  <label>B:</label>
+  <input type="range" id="sl-lb" min="0" max="255" value="255" style="width:100px"
+         oninput="updateLightColor()">
+</div>
+
+<!-- Pet bar -->
+<div class="ctrl-row">
+  <span style="white-space:nowrap;color:#aaa;">Bessie's Happiness</span>
+  <div style="background:#333;width:180px;height:14px;border-radius:6px;overflow:hidden;border:1px solid #555;">
     <div id="pet-bar" style="height:100%;width:100%;background:#44dd44;transition:width 0.4s,background 0.4s;"></div>
   </div>
+  <span id="story" style="color:#ffe066;">Bessie is happy!</span>
 </div>
-<div id="story" style="font-size:0.9em;color:#ffe066;margin:4px 0;min-height:1.2em;">
-  Bessie is happy! Keep her company.
+
+<!-- OBJ file picker -->
+<div class="ctrl-row">
+  <label>Load OBJ: <input type="file" id="obj-input" accept=".obj" onchange="loadOBJFromFile(this)"></label>
 </div>
+
 <div id="controls">
-  <strong>WASD</strong> move &nbsp;|&nbsp;
-  <strong>Q/E</strong> turn &nbsp;|&nbsp;
-  <strong>Mouse drag</strong> look &nbsp;|&nbsp;
-  <strong>F</strong> pet cow / add block &nbsp;|&nbsp;
-  <strong>G</strong> remove block &nbsp;|&nbsp;
-  <strong>Click</strong> lock pointer for smooth look
+  <strong>WASD</strong> move &nbsp;|&nbsp; <strong>Q/E</strong> turn &nbsp;|&nbsp;
+  <strong>Mouse drag</strong> look &nbsp;|&nbsp; <strong>F</strong> pet cow / add block &nbsp;|&nbsp;
+  <strong>G</strong> remove block &nbsp;|&nbsp; <strong>Click</strong> lock pointer
 </div>
 
 <script src="../asgn1/lib/cuon-utils.js"></script>
 <script src="../asgn0/lib/cuon-matrix-cse160.js"></script>
 <script src="camera.js"></script>
+<script src="Model.js"></script>
 <script src="asgn4.js"></script>
 <script>window.onload = main;</script>
 </body>
