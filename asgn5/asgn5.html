@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CSE 160 Assignment 5 - Three.js Exploration World</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="world">
+    <canvas id="scene"></canvas>
+
+    <section id="hud" aria-label="Scene information">
+      <h1>Crystal Courtyard</h1>
+      <p>WASD moves, mouse drag orbits, scroll zooms. Click an obelisk to pulse the beacon.</p>
+      <p><strong>Wow feature:</strong> interactive beacon event with raycasting, animated particles, pulsing lights, and a camera-following status panel.</p>
+    </section>
+  </main>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module" src="asgn5.js"></script>
+</body>
+</html>

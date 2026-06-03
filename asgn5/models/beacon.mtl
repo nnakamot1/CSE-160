@@ -1,0 +1,6 @@
+newmtl BeaconStripes
+Ka 0.25 0.25 0.25
+Kd 1.0 1.0 1.0
+Ks 0.6 0.6 0.6
+Ns 80
+map_Kd ../assets/model-stripes.svg
