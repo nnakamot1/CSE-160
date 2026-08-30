@@ -4,7 +4,10 @@ CSE 160 — Introduction to Computer Graphics
 Coursework for CSE 160, built with raw WebGL (`asgn0`–`asgn4`) and Three.js
 (`asgn5`). Each assignment lives in its own folder with its own HTML/JS/README.
 
-Live index: [`index.html`](index.html) links to the current featured project.
+**Live site: https://nnakamot1.github.io/CSE-160/** — this is the way to
+view all of the projects; every assignment (including the ones that load
+textures/models) works correctly from there since it's served over real
+HTTP.
 
 Assignments
 -----------
@@ -24,17 +27,11 @@ Tech stack
 - `asgn0`–`asgn4`: vanilla WebGL, hand-written GLSL shaders, `cuon-utils.js` / `cuon-matrix-cse160.js` helper libraries (from the course).
 - `asgn5`: [Three.js](https://threejs.org/) (`OrbitControls`, `MTLLoader`, `OBJLoader`).
 
-Running locally
+Viewing the work
 ----------------
 
-WebGL texture/model loading is blocked by the browser's CORS policy when
-opened directly as a `file://` URL, so serve the repo over HTTP:
+Use the live site above: https://nnakamot1.github.io/CSE-160/
 
-```bash
-python3 -m http.server 8000
-```
-
-Then open, e.g., `http://localhost:8000/asgn4/asgn4.html`.
-
-Assignments with no external texture/model files (`asgn0`, `asgn1`, `asgn2`)
-can also be opened directly as `file://` HTML pages.
+It links out to every assignment (`asgn0`–`asgn5`) from one page, and since
+it's real HTTP, texture/model loading works everywhere — no local setup or
+server needed.
